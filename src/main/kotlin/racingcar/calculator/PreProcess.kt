@@ -9,8 +9,9 @@ class PreProcess {
             return s.split(" ")
         }
 
-        fun extractNumbers(input: List<String>): List<String> {
+        fun extractNumbers(input: List<String>): List<Double> {
             return input.filter { !validOperator.contains(it) }
+                .map { it.toDouble() }
         }
 
         fun extractOperators(input: List<String>): List<String> {

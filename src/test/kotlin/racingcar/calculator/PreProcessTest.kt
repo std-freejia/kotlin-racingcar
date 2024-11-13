@@ -17,8 +17,8 @@ class PreProcessTest {
         val result: List<String> = PreProcess.splitBySpace(input)
         assertThat(listOf("3", "+", "5")).isEqualTo(result)
 
-        val numbers: List<String> = PreProcess.extractNumbers(result)
-        assertThat(listOf("3", "5")).isEqualTo(numbers)
+        val numbers: List<Double> = PreProcess.extractNumbers(result)
+        assertThat(listOf(3.0, 5.0)).isEqualTo(numbers)
     }
 
     @Test
