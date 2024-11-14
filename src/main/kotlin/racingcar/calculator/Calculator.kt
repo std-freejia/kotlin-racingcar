@@ -8,7 +8,7 @@ class Calculator(inputString: String) {
     fun calculate(): Double {
         var answer = numbers[0]
         for (i in operators.indices) {
-            var currentOperator = Operator.getOperatorBySymbol(operators[i])
+            val currentOperator = Operator.getOperatorBySymbol(operators[i])
             answer = currentOperator.apply(answer, numbers[i + 1])
         }
         return answer
