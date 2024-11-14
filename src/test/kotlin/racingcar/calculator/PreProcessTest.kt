@@ -1,6 +1,7 @@
 package racingcar.calculator
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 
 class PreProcessTest {
@@ -29,5 +30,16 @@ class PreProcessTest {
 
         val operators: List<String> = PreProcess.extractOperators(result)
         assertThat(listOf("+", "-")).isEqualTo(operators)
+    }
+
+    @Test
+    fun `문자열 리스트에서 연산자만 추출시 비정상 연산자 포함시 예외 처리`() {
+        val input = "3 + 5 & 2"
+        val result: List<String> = PreProcess.splitBySpace(input)
+        assertThat(listOf("3", "+", "5", "&", "2")).isEqualTo(result)
+
+        assertThatThrownBy {
+            PreProcess.extractOperators(result)
+        }.isInstanceOf(IllegalArgumentException::class.java)
     }
 }

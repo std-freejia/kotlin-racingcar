@@ -15,11 +15,12 @@ class PreProcess {
         }
 
         fun extractOperators(input: List<String>): List<String> {
+            val onlyCharacters = input.filter { !it.matches(Regex("\\d+")) }
+            val onlyValidOperator = onlyCharacters.all(validOperator::contains)
+            if (!onlyValidOperator) {
+                throw IllegalArgumentException()
+            }
             return input.filter { validOperator.contains(it) }
-        }
-
-        fun parseStringToDouble(s: String): Double {
-            return s.toDouble()
         }
     }
 }

@@ -1,5 +1,6 @@
 package racingcar.calculator
 
+import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 
@@ -10,15 +11,12 @@ class ValidatorTest {
         assertThatThrownBy {
             Validator.isValidOperator(input)
         }.isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage("유효하지 않은 연산자입니다")
+            .hasMessage("유효하지 않은 식입니다")
     }
 
     @Test
-    fun `사칙연산 기호가 아닌 경우`() {
-        val input = "3 & 5"
-        assertThatThrownBy {
-            Validator.isValidOperator(input)
-        }.isInstanceOf(IllegalArgumentException::class.java)
-            .hasMessage("유효하지 않은 연산자입니다")
+    fun `사용자 입력이 정상 연산식인 경우`() {
+        val input = "3 + 2 - 1"
+        assertThat(Validator.isValidOperator(input)).isTrue()
     }
 }
